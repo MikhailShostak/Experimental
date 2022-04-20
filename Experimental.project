@@ -1,0 +1,57 @@
+Targets:
+  - Name: Core
+    Type: StaticLibrary
+    PackageVersion: 1.0.0
+    Dependencies:
+      - Utils/1.0.0
+    Includes:
+      - Utils
+  - Name: Graphics
+    Type: StaticLibrary
+    PackageVersion: 1.0.0
+    OptionalIncludes:
+      - PrivateImplementation.hpp
+    LocalDependencies:
+      - ExperimentalThirdParty
+    Dependencies:
+      - Utils/1.0.0
+    Includes:
+      - Utils
+  - Name: ImGuiIntegration
+    Type: StaticLibrary
+    PackageVersion: 1.0.0
+    LocalDependencies:
+      - Graphics
+  - Name: NativeApplication
+    Type: StaticLibrary
+    PackageVersion: 1.0.0
+    LocalDependencies:
+      - Core
+      - Graphics
+      - ImGuiIntegration
+  - Name: ECS
+    Type: StaticLibrary
+    PackageVersion: 1.0.0
+    LocalDependencies:
+      - Graphics
+      - ImGuiIntegration
+  - Name: Input
+    Type: StaticLibrary
+    PackageVersion: 1.0.0
+    LocalDependencies:
+      - ECS
+  - Name: SceneWindow
+    Type: StaticLibrary
+    PackageVersion: 1.0.0
+    LocalDependencies:
+      - Input
+      - NativeApplication
+  - Name: ExperimentalThirdParty
+    Type: Interface
+    PackageVersion: 1.0.0
+    Dependencies:
+      - DiligentEngineExt/2.5
+      - assimp/5.2.2
+      - entt/3.9.0
+    Includes:
+      - entt/entt.hpp
